@@ -1,0 +1,46 @@
+﻿@{
+    ViewData["Title"] = "Scan";
+}
+
+<div class="row">
+    <div class="accordion" id="accordionExample">
+        <div class="accordion-item">
+            <h2 class="accordion-header">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    Detailed Search
+                </button>
+            </h2>
+            <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    <form>
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="input-group mb-3">
+                                    <label class="input-group-text">University</label>
+                                    <input type="text" class="form-control" placeholder="University" aria-label="University" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="input-group mb-3">
+                                    <label class="input-group-text">Institute</label>
+                                    <input type="text" class="form-control" placeholder="Institute" aria-label="Institute" aria-describedby="basic-addon1">
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="input-group mb-3">
+                                    <label class="input-group-text">Thesis Type</label>
+                                    <select class="form-select">
+                                        <option selected>Choose</option>
+                                        <option value="">Type 1</option>
+                                    </select>
+                                </div>
+                                <div class="input-group mb-3">
+                                    <label class="input-group-text">University</label>
+                                    <input type="text" class="form-control" placeholder="University" aria-label="University" aria-describedby="basic-addon1">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
