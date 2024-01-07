@@ -59,14 +59,22 @@ namespace DatabaseProject.Controllers
                     NumPages = thesis.NumPages,
                     Language = thesis.Language,
                     SubmissionDate = DateTime.UtcNow,
-                    SupervisorId = supervisor.SupervisorId,
-                    CoSupervisorId = coSupervisor.CoSupervisorId,
                     Author = author,
-                    CoSupervisor = coSupervisor,
-                    Supervisor = supervisor,
                     University = university,
                     Institute = institute
                 };
+
+                if (supervisor != null)
+                {
+                    newThesis.Supervisor = supervisor;
+                    newThesis.SupervisorId = supervisor.SupervisorId;
+                }
+                if (coSupervisor != null)
+                {
+                    newThesis.CoSupervisor = coSupervisor;
+                    newThesis.CoSupervisorId = coSupervisor.CoSupervisorId;
+                }
+
                 _context.Theses.Add(newThesis);
                 await _context.SaveChangesAsync();
 
