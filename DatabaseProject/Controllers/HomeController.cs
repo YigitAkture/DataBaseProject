@@ -1,4 +1,6 @@
-﻿using DatabaseProject.Models;
+﻿using DatabaseProject.Data;
+using DatabaseProject.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 

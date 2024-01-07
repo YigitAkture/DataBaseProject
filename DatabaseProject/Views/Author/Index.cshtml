@@ -1,0 +1,55 @@
+﻿@model IEnumerable<DatabaseProject.Data.Models.Author>
+
+@{
+    ViewData["Title"] = "Author";
+}
+
+<h1>Authors</h1>
+
+<p>
+    <a class="btn btn-primary float-end" asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Id
+            </th>
+            <th>
+                Name
+            </th>
+            <th>
+                Surname
+            </th>
+            <th>
+                Age
+            </th>
+            <th class="text-end">
+                Action
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @item.AuthorId
+                </td>
+                <td>
+                    @item.AuthorName
+                </td>
+                <td>
+                    @item.AuthorSurname
+                </td>
+                <td>
+                    @item.AuthorAge
+                </td>
+                <td class="text-end">
+                    <a asp-action="Edit" asp-route-id="@item.AuthorId">Edit</a> |
+                    <a asp-action="Delete" asp-route-id="@item.AuthorId">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

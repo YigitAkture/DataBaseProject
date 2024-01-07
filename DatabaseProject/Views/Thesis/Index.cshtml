@@ -1,0 +1,152 @@
+﻿@model DatabaseProject.Models.CreateThesisModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<div>
+    <h1>Create</h1>
+</div>
+
+<h4>Thesis</h4>
+<hr />
+<div class="row justify-content-center">
+    <form asp-action="Create">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="row">
+            <div class="col-12">
+                <div class="form-group">
+                    <label class="control-label">Title</label>
+                    <input asp-for="Title" class="form-control" />
+                    <span asp-validation-for="Title" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-12">
+                <div class="form-group">
+                    <label class="control-label">Abstract</label>
+                    <textarea asp-for="Abstract" class="form-control" rows="4"></textarea>
+                    <span asp-validation-for="Abstract" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-6">
+                <div class="form-group">
+                    <label class="control-label">Type</label>
+                    <input asp-for="Type" class="form-control" />
+                    <span asp-validation-for="Type" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="form-group">
+                    <label class="control-label">Language</label>
+                    <input asp-for="Language" class="form-control" />
+                    <span asp-validation-for="Language" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-6">
+                <div class="form-group">
+                    <label class="control-label">Subject Topics</label>
+                    <select asp-for="TSubjects" class="form-select" asp-items="ViewBag.SubjectTopicList" multiple="multiple"></select>
+                    <span asp-validation-for="TSubjects" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="form-group">
+                    <label class="control-label">Keywords (use ; for separation)</label>
+                    <input asp-for="Keywords" class="form-control" />
+                    <span asp-validation-for="Keywords" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-6">
+                <div class="form-group">
+                    <label class="control-label">Number of Pages</label>
+                    <input asp-for="NumPages" class="form-control" />
+                    <span asp-validation-for="NumPages" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="form-group">
+                    <label class="control-label">Author</label>
+                    <select asp-for="AuthorId" class="form-select" asp-items="ViewBag.AuthorList"></select>
+                    <span asp-validation-for="AuthorId" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-6">
+                <div class="form-group">
+                    <label class="control-label">University</label>
+                    <select asp-for="UniversityId" class="form-select" asp-items="ViewBag.UniversityList"></select>
+                    <span asp-validation-for="UniversityId" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="form-group">
+                    <label class="control-label">Institue</label>
+                    <select asp-for="InstitueId" class="form-select">
+                        <option value="">Choose University First</option>
+                    </select>
+                    <span asp-validation-for="InstitueId" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-6">
+                <div class="form-group">
+                    <label class="control-label">Supervisor</label>
+                    <select asp-for="SupervisorId" class="form-select" asp-items="ViewBag.SupervisorList"></select>
+                    <span asp-validation-for="SupervisorId" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="form-group">
+                    <label class="control-label">Co-Supervisor</label>
+                    <select asp-for="CoSupervisorId" class="form-select" asp-items="ViewBag.CoSupervisorList"></select>
+                    <span asp-validation-for="CoSupervisorId" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center mt-3">
+            <button type="submit" class="btn btn-success col-6">Submit</button>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script>
+        $(function () {
+            $("#UniversityId").on("change", function () {
+                var selected = $(this).find(":selected").val();
+                $.ajax({
+                    url: "/Thesis/GetIntitutesByUniversity?universityId=" + selected,
+                    type: "get",
+                    contentType: "application/json",
+                    success: function (institues) {
+                        $("#InstitueId option").each(function () {
+                            $(this).remove();
+                        });
+                        $.each(institues, function (i, item) {
+                            $("#InstitueId").append($("<option>", {
+                                value: item.value,
+                                text: item.text
+                            }));
+                        });
+                    },
+                    error: function () {
+                        alert("Error");
+                    }
+                });
+            });
+        });
+    </script>
+}

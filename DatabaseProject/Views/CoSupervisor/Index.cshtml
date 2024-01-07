@@ -1,0 +1,55 @@
+﻿@model IEnumerable<DatabaseProject.Data.Models.CoSupervisor>
+
+@{
+    ViewData["Title"] = "Co-Supervisor";
+}
+
+<h1>Co-Supervisors</h1>
+
+<p>
+    <a class="btn btn-primary float-end" asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Id
+            </th>
+            <th>
+                Name
+            </th>
+            <th>
+                Surname
+            </th>
+            <th>
+                Age
+            </th>
+            <th class="text-end">
+                Action
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @item.CoSupervisorId
+                </td>
+                <td>
+                    @item.CoSupervisorName
+                </td>
+                <td>
+                    @item.CoSupervisorSurname
+                </td>
+                <td>
+                    @item.CoSupervisorAge
+                </td>
+                <td class="text-end">
+                    <a asp-action="Edit" asp-route-id="@item.CoSupervisorId">Edit</a> |
+                    <a asp-action="Delete" asp-route-id="@item.CoSupervisorId">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
